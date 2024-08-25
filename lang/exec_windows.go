@@ -3,20 +3,20 @@
 
 package lang
 
-import "os/exec"
+import (
+	"syscall"
+)
 
-func getCmdTokens(p *Process) (exe string, parameters []string, err error) {
-	_, err = p.Parameters.String(0)
-	if err != nil {
-		return
-	}
-
-	exe = "cmd"
-	parameters = append([]string{"/c"}, p.Parameters.StringArray()...)
-
-	return
+func osExecGetArgv(p *Process) []string {
+	argv := []string{"cmd", "/c"}
+	argv = append(argv, p.Parameters.StringArray()...)
+	return argv
 }
 
-func osSyscalls(_ *exec.Cmd, _ int) {
-	return
+func osExecFork(p *Process, argv []string) error {
+	return execForkFallback(p, argv)
+}
+
+func osSysProcAttr(_ int) *syscall.SysProcAttr {
+	return nil
 }
