@@ -89,7 +89,7 @@ event to Linux, macOS and UNIX systems instead.
 
 ## See Also
 
-* [`config`](../commands/config.md):
+* [Shell Configuration And Settings (`config`)](../commands/config.md):
   Query or define Murex runtime settings
 * [`event`](../commands/event.md):
   Event driven programming for shell scripts

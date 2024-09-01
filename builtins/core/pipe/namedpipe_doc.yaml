@@ -1,7 +1,9 @@
 - DocumentID: namedpipe
   Title: >+
-    `<pipe>` Read Named Pipe
-  CategoryID: commands
+    Read / Write To A Named Pipe (`<pipe>`)
+  CategoryID: parser
+  SubCategoryIDs:
+    - commands.io
   Summary: >-
     Reads from a Murex named pipe
   Description: |-
@@ -51,8 +53,10 @@
 
 - DocumentID: stdin
   Title: >+
-    `<stdin>`
-  CategoryID: commands
+    Read From Stdin (`<stdin>`)
+  CategoryID: parser
+  SubCategoryIDs:
+    - commands.io
   Summary: >-
     Read the stdin belonging to the parent code block
   Description: |-

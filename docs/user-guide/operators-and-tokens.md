@@ -14,6 +14,7 @@
 - [Operators And Tokens](#operators-and-tokens)
   - [Terminology](#terminology)
   - [Modifiers](#modifiers)
+  - [Immutable Merge](#immutable-merge)
   - [Comparators](#comparators)
   - [Assignment](#assignment)
   - [Conditionals](#conditionals)
@@ -59,12 +60,13 @@ Order of operations:
 2. sub-shells / sub-expressions
 3. multiplication / division (expressions only)
 4. addition / subtraction (expressions only)
-5. comparisons, eg greater than
-6. logical and (sub-expressions only)
-7. logical or (sub-expressions only)
-8. elvis (expressions only)
-9. assign (expressions only)
-10. _left_ to _right_
+5. immutable merge
+6. comparisons, eg greater than (expressions only)
+7. logical and (sub-expressions only)
+8. logical or (sub-expressions only)
+9. elvis (expressions only)
+10. assign (expressions only)
+11. _left_ to _right_
 
 ### Expression Or Statement Discovery
 
@@ -104,6 +106,23 @@ Read more:
 * Strict types config: [strict types](/docs/user-guide/strict-types.md)
 * Operators: [+](/docs/parser/addition.md), [-](/docs/parser/subtraction.md), [*](/docs/parser/multiplication.md), [/](/docs/parser/division.md)
 
+### Immutable Merge
+
+Returns the result of merging _right_ into _left_.
+
+_immutable merge_ does not modify the contents of either _left_ nor _right_.
+
+The direction of the arrow indicates that the result returned is a new value
+rather than an updated assignment.
+
+_Left_ can be a statement or expression, whereas _right_ can only be an
+expression. However you can still use a sub-shell as part of, or the entirety,
+of, that expression.
+
+| Operator | Name            | Operation                                   |
+|----------|-----------------|---------------------------------------------|
+| `~>`     | Immutable Merge | Returns merged value of _right_ into _left_ |
+
 ### Comparators
 
 All comparators replace the _left_, operator and _right_ with the returned
@@ -131,23 +150,25 @@ Read more:
 
 ### Assignment
 
-Assignment returns `true` if successful.
+Assignment returns `null` if successful.
 
 Assignment is only supported in expressions.
 
-| Operator | Name                | Operation                                         |
-|----------|---------------------|---------------------------------------------------|
-| `=`      | Assign (overwrite)  | Assign _right_ to _left_                          |
-| `:=`     | Assign (retain)     | **EXPERIMENTAL**                                  |
-| `<~`     | Assign Or Merge     | Merge _right_ (array / object) into _left_        |
-| `+=`     | Assign And Add      | Add _right_ to _left_ and assign to _left_        |
-| `-=`     | Assign And Subtract | Subtract _right_ from _left_ and assign to _left_ |
-| `*=`     | Assign And Multiply | Multiply _right_ with _left_ and assign to _left_ |
-| `/=`     | Assign And Divide   | Divide _right_ with _left_ and assign to _left_   |
+| Operator | Name                  | Operation                                         |
+|----------|-----------------------|---------------------------------------------------|
+| `=`      | Assign (overwrite)    | Assign _right_ to _left_                          |
+| `:=`     | Assign (retain)       | **EXPERIMENTAL**                                  |
+| `<~`     | Assign Or Merge       | Merge _right_ (array / object) into _left_        |
+| `+=`     | Assign And Add        | Add _right_ to _left_ and assign to _left_        |
+| `-=`     | Assign And Subtract   | Subtract _right_ from _left_ and assign to _left_ |
+| `*=`     | Assign And Multiply   | Multiply _right_ with _left_ and assign to _left_ |
+| `/=`     | Assign And Divide     | Divide _right_ with _left_ and assign to _left_   |
+| `++`     | Add one to variable   | Adds one to _right_ and reassigns                 |
+| `--`     | Subtract one from var | Subtracts one from _right_ and reassigns          |
 
 Read more:
 * Data types: [bool](/docs/types/bool.md)
-* Operators: =, [<~](/docs/parser/assign-or-merge.md), [+=](/docs/parser/add-with.md),  [-=](/docs/parser/subtract-by.md), [=](/docs/parser/multiply-by.md), [=](/docs/parser/divide-by.md)
+* Operators: =, [<~](/docs/parser/assign-or-merge.md), [+=](/docs/parser/add-with.md),  [-=](/docs/parser/subtract-by.md), [*=](/docs/parser/multiply-by.md), [/=](/docs/parser/divide-by.md)
 
 ### Conditionals
 
@@ -264,10 +285,10 @@ characters have special meanings when escaped.
 
 ## See Also
 
+* [Expressions (`expr`)](../commands/expr.md):
+  Expressions: mathematical, string comparisons, logical operators
 * [Language Tour](../Murex/tour.md):
   Getting started with Murex
-* [`expr`](../commands/expr.md):
-  Expressions: mathematical, string comparisons, logical operators
 
 <hr/>
 
